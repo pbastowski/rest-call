@@ -9,7 +9,7 @@ Package.describe({
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use('pbastowski:angular-babel@0.1.5');
-    api.use('pbastowski:angular2-now@0.2.8');
+    api.use('pbastowski:angular2-now@0.2.9');
     api.addFiles('rest-call.es6.js', ['client']);
 });
 
