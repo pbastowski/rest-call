@@ -2,7 +2,7 @@ Package.describe({
   name: 'pbastowski:rest-call',
   version: '0.0.3',
   summary: 'RestCall annotation for angular2-now',
-  git: '',
+  git: 'https://github.com/pbastowski/rest-call',
   documentation: 'README.md'
 });
 
@@ -13,8 +13,8 @@ Package.onUse(function(api) {
   api.addFiles('rest-call.es6.js', ['client']);
 });
 
-Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('rest-call.es6.js');
-  api.addFiles('rest-call-tests.js');
-});
+//Package.onTest(function(api) {
+//  api.use('tinytest');
+//  api.use('rest-call.es6.js');
+//  api.addFiles('rest-call-tests.js');
+//});
