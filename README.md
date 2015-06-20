@@ -70,15 +70,15 @@ The `options` argument is an object that may contain the following attributes. T
 
 Attribute | Description
 ---------------|------------------------------------
-`baseUrl`      | string = for example '/rest/'
-`method`       | string = 'GET', 'PUT', 'POST', 'DELETE', 'UPDATE' are valid, 'GET' is default
-`jsonPrefix`   | string = optional JSON vulnerability prefix to automatically remove from returned data
-`showError`    | truthy = show the error dialog, falsy = don't show it
-`ignoreErrors` | array  = error/status codes to pass through to the caller and not handle
-`errorHandler` | string = angular service name or function to call when an $HTTP error occurs. There is a default handler already, so, it is not necessary to provide one.<br> `errorHandler` receives the following object as an argument: { `data`: {}, `api`: "", `method`: "", `payload`: {}, `options`: {} }
-`errorMessage` | string = custom error message to display at the top of the error dialog's text
-`spinner`      | object = exposes show() and hide() methods
-`events`       | object = exposes beforeCall() and afterCall(), which will be called before and after the ajax call
+baseUrl      | string = for example '/rest/'
+method       | string = 'GET', 'PUT', 'POST', 'DELETE', 'UPDATE' are valid, 'GET' is default
+jsonPrefix   | string = optional JSON vulnerability prefix to automatically remove from returned data
+showError    | truthy = show the error dialog, falsy = don't show it
+ignoreErrors | array  = error/status codes to pass through to the caller and not handle
+errorHandler | string = angular service name or function to call when an $HTTP error occurs. There is a default handler already, so, it is not necessary to provide one.<br> `errorHandler` receives the following object as an argument: { `data`: {}, `api`: "", `method`: "", `payload`: {}, `options`: {} }
+errorMessage | string = custom error message to display at the top of the error dialog's text
+spinner      | object = exposes show() and hide() methods
+events       | object = exposes beforeCall() and afterCall(), which will be called before and after the ajax call
 
 ### `@RestCall`( apiUrl, ?options) - @annotation
 
