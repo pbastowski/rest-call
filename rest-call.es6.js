@@ -32,14 +32,27 @@ var ng2nRestCall = function () {
         events:       {beforeCall: angular.noop, afterCall: angular.noop}
     };
 
-    var currentModule = ("undefined" !== typeof angular2now) ? angular2now.options().currentModule : '';
+    if ("undefined" !== typeof angular2now) {
+        var ng2nOptions = angular2now.options();
+    }
+    var currentModule;
+
+    function getNg2nSettings() {
+        currentModule = ng2nOptions.currentModule();
+
+        return {
+            events: ng2nOptions.events,
+            spinner: ng2nOptions.spinner
+        }
+    }
 
     function restConfig(options) {
         angular.merge(restOptions, options);
     }
 
     function RestCall(apiTemplate, _options) {
-        var options = angular.merge({}, restOptions, _options);
+        var options = angular.merge({}, restOptions, getNg2nSettings(), _options);
+
         var spinner = options.spinner || restOptions.spinner;
         var events = options.events || restOptions.events;
 
