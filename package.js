@@ -1,6 +1,6 @@
 Package.describe({
     name:          'pbastowski:rest-call',
-    version:       '0.0.4',
+    version:       '0.0.5',
     summary:       'RestCall annotation for angular2-now',
     git:           'https://github.com/pbastowski/rest-call',
     documentation: 'README.md'

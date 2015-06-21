@@ -91,20 +91,23 @@ var ng2nRestCall = function () {
     function restService(api, method, args, _options) {
         var options = angular.merge({}, restOptions, _options);
         var that = this;
-
-        //$log.log('restService: options: ', options);
+        var headers = options.headers;
 
         if (!checkParameters()) return;
 
-        // Call the REST API
-        var pr = $http({
+        // Prepare the HTTP call definition object
+        var hdo = {
             url:               options.baseUrl + api,
             data:              args,
             method:            method,
             transformResponse: function (data) {
                 return stripJsonVulnerabilityPrefix(data, options.jsonPrefix);
             }
-        }).then(success, errorHandler);
+        };
+        if (headers) hdo.headers = headers;
+
+        // Call the REST API
+        var pr = $http(hdo).then(success, errorHandler);
 
         return pr;
 

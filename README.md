@@ -79,6 +79,8 @@ errorHandler | string = angular service name or function to call when an $HTTP e
 errorMessage | string = custom error message to display at the top of the error dialog's text
 spinner      | object = exposes show() and hide() methods
 events       | object = exposes beforeCall() and afterCall(), which will be called before and after the ajax call
+headers      | object, custom XHR header, for example { 'Content-Type': 'application/x-www-form-urlencoded' }
+
 
 ### `@RestCall`( apiUrl, ?options) - @annotation
 
