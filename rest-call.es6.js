@@ -177,7 +177,7 @@ var ng2nRestCall = function () {
                     if (data.status === 401) er = 'Method ' + api + ' requires authorization.\n\n';
 
                     // log the error, showing the submitted data and the returned data
-                    $log.warn('Error: ', method, api, '\n', args, '\n', data.data);
+                    $log.debug('Error: ', method, api, '\n  args: ', args, '\n data: ', data.data);
 
                     if (options.showError && !(options.ignoreErrors && options.ignoreErrors.indexOf(data.status) > -1)) {
                         // handle options.ignoreErrors array, if present
