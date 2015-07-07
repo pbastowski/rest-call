@@ -95,7 +95,7 @@ class myClass {
 Name the stub method after the function that your REST call is expected to perform. The annotation will replace the stub with an actual function that will perform the call to the rest/ajax end-point and return a promise to the data.
 
 #### `apiUrl` 
-It is the url or the REST api that you actually want to call, such as "users/1". apiUrl may contain replaceable parameters like `${arg1}`, which will be replaced with actual values that you will pass in as an argument when you call the method. See the example above.
+It is the url or the REST api that you actually want to call, such as "users/1". apiUrl may contain replaceable parameters like `${arg1}`, which will be replaced with actual values that you will pass in as an argument when you call the method iek this:
 
      getUser(1);
 
@@ -108,7 +108,7 @@ When calling the method, make sure to provide one argument per replaceable param
 
     getMembersHoliday( 'john', 2 )
 
-If using a 'PUT' or 'POST' method, the payload is passed after all the arguments.
+If using a 'PUT' or 'POST' method, the payload is passed in last, after all the arguments.
 
 The method definition
 
