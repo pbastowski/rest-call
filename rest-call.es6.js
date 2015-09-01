@@ -97,7 +97,7 @@ var ng2nRestCall = function () {
 
             };
 
-            return target;
+            return descriptor;
         };
     }
 
