@@ -58,7 +58,7 @@ var ng2nRestCall = function () {
 
         return function (target, name, descriptor) {
 
-            target[name] = function () {
+            descriptor.value = function () {
                 var api = apiTemplate;
                 var REGEX = /\${(\w+)}/g;
 
