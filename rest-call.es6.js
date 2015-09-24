@@ -200,7 +200,7 @@ var ng2nRestCall = function () {
             if (jsonPrefix && 'string' === typeof data) {
                 // Remove the leading JSON vulnerability prefix
                 if (data.indexOf(jsonPrefix) > -1)
-                    data = angular.fromJson(data.slice(jsonPrefix.length));
+                    data = data.slice(jsonPrefix.length);
             }
             return data;
         }
