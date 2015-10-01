@@ -105,12 +105,18 @@ var ng2nRestCall = function () {
         var options = angular.merge({}, restOptions, _options);
         var that = this;
         var headers = options.headers;
+        var queryParams = '';
 
         if (!checkParameters()) return;
 
+        // A GET call can optionally pass a data payload, in the form od a JS object literal,
+        // through the args parameter. These args must be serialized, converted into a queryString,
+        // and appended to the api parameter.
+        if (args && method === 'GET') queryParams = '?' + urlEncode(args);
+
         // Prepare the HTTP call definition object
         var hdo = {
-            url:               options.baseUrl + api,
+            url:               options.baseUrl + api + queryParams,
             data:              args,
             method:            method,
             transformResponse: function (data) {
@@ -204,6 +210,41 @@ var ng2nRestCall = function () {
             }
             return data;
         }
+
+        /**
+         * urlEncode
+         *
+         * Encoding a JS object into a URL string. If an array is passed in it will be expanded correctly.
+         *
+         * Usage: urlEncode(args)
+         *
+         * { a:1, b:2 } ---> "a=1&b=2".
+         * { s1: 'hello', s2: 'world', abc: [1,2,3] } ---> "s1=hello&s2=world&abc=1&abc=2&abc=3"
+         *
+         * Object properties with empty string values or 0 length arrays are not included in the returned string.
+         * { a:'', b:2, arr: [] }
+         * encoded into the string "b=2".
+         *
+         * @param data A JavaScript object to be encoded into a URL string
+         * @returns {*}
+         */
+        function urlEncode(data) {
+            if (typeof data === 'undefined') return '';
+            if (data instanceof String) return data;
+            if (Object.keys(data).length === 0) return '';
+
+            var url = '', i, v;
+            for (i in data) {
+                v = data[i];
+                if (v instanceof Array && v.length)
+                    url += (url ? '&' : '') + v.map(function(v) { return encodeURIComponent(i) + '=' + encodeURIComponent(v)}).join('&');
+                else
+                    if (v+'' !== '' && v+'' !== 'undefined') url += (url ? '&' : '') + encodeURIComponent(i) + '=' + encodeURIComponent(v);
+
+            }
+            return url;
+        }
+
     }
 
     return {
