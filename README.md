@@ -132,9 +132,9 @@ When an `$http` error occurs, your error handler will be called with one argumen
 
 Argument | Description
 ---------|------------
-`data` | The response received by the $http call
-`api` | The `apiUrl` you passed to @RestCall
-`method` | The `method` you passed to @RestCall
-`payload` | The data object you passed when you called the function annotated with @RestCall
-`options` | The local `options` argument, or the global one if no local one was supplied
-`args` | All the arguments passed to the method decorated with @RestCall. This includes the `payload` and also any query parameters that were interpolated in your `apiUrl`.
+data | The response received by the $http call
+api | The `apiUrl` you passed to @RestCall
+method | The `method` you passed to @RestCall
+payload | The data object you passed when you called the function annotated with @RestCall
+options | The local `options` argument, or the global one if no local one was supplied
+args | All the arguments passed to the method decorated with @RestCall. This includes the `payload` and also any query parameters that were interpolated in your `apiUrl`.
