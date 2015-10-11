@@ -3,6 +3,7 @@ var ng2nRestCall = function () {
     var $http = angular.injector(['ng']).get('$http');
     var $q = angular.injector(['ng']).get('$q');
     var $log = angular.injector(['ng']).get('$log');
+    var slice = Array.prototype.slice;
 
     /**
      * restConfig sets the global options for rest calls annotated with @RestCall.
@@ -67,7 +68,7 @@ var ng2nRestCall = function () {
                     options.spinner = spinner;
                 }
 
-                var args = Array.prototype.slice.call(arguments);
+                var args = slice.call(arguments);
 
                 // Get parameter names from apiTemplate
                 var apiArgs = apiTemplate.match(REGEX) || [];
@@ -84,7 +85,7 @@ var ng2nRestCall = function () {
 
                 // todo: should call Meteor after resolution of promise returned by beforeCall()
                 // Call the restService
-                var promise = restService(api, options.method, args[0], options);
+                var promise = restService(api, options.method, args[0], options, slice.call(arguments));
 
                 // Do post call tasks
                 promise.finally(function () {
@@ -101,7 +102,7 @@ var ng2nRestCall = function () {
         };
     }
 
-    function restService(api, method, args, _options) {
+    function restService(api, method, args, _options, originalArguments) {
         var options = angular.merge({}, restOptions, _options);
         var that = this;
         var headers = options.headers;
@@ -164,7 +165,10 @@ var ng2nRestCall = function () {
                         options.errorHandler = inj.get(options.errorHandler);
                 }
 
-                options.errorHandler({data: data, api: api, method: method, payload: args, options: options});
+                // Call the custom error handler, passing all the original call data and objects.
+                // originalArguments is passed separately to args, because they are not always equal.
+                // This is because the args array may have had query parameters removed from it.
+                options.errorHandler( {data: data, api: api, method: method, payload: args, options: options, args: originalArguments} );
             }
             else {
 
