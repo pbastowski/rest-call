@@ -4,7 +4,7 @@ This package exports `restConfig` (function) and `RestCall` (annotation), which 
 
 ## Installation
 
-    meteor add pbastowski:rest-service
+    meteor add pbastowski:rest-call
     
 ## Usage
 
