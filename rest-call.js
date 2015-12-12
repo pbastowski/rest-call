@@ -1,9 +1,43 @@
 var ng2nRestCall = function () {
     // Get $http and $log from angular
-    var $http = angular.injector(['ng']).get('$http');
-    var $q = angular.injector(['ng']).get('$q');
-    var $log = angular.injector(['ng']).get('$log');
-    var slice = Array.prototype.slice;
+
+    var inj, $http, $q, $log, slice;
+    var ng2nOptions, restOptions, currentModule;
+
+    function init() {
+        inj = angular.injector(['ng']);
+
+        $http = inj.get('$http');
+        $q = inj.get('$q');
+        $log = inj.get('$log');
+        slice = Array.prototype.slice;
+
+        restOptions = {
+            baseUrl:      '',
+            method:       'GET',
+            jsonPrefix:   '',
+            showError:    1,
+            ignoreErrors: [],
+            errorHandler: '',
+            errorMessage: '',
+            spinner:      {show: angular.noop, hide: angular.noop},
+            events:       {beforeCall: angular.noop, afterCall: angular.noop}
+        };
+
+        if ("undefined" !== typeof angular2now) {
+            ng2nOptions = angular2now.options();
+        }
+    }
+
+
+    function getNg2nSettings() {
+        currentModule = ng2nOptions.currentModule();
+
+        return {
+            events: ng2nOptions.events,
+            spinner: ng2nOptions.spinner
+        }
+    }
 
     /**
      * restConfig sets the global options for rest calls annotated with @RestCall.
@@ -20,32 +54,6 @@ var ng2nRestCall = function () {
      * - spinner        object = exposes show() and hide() methods
      * - events         object = exposes beforeCall() and afterCall(), which will be called before and after the ajax call
      */
-
-    var restOptions = {
-        baseUrl:      '',
-        method:       'GET',
-        jsonPrefix:   '',
-        showError:    1,
-        ignoreErrors: [],
-        errorHandler: '',
-        errorMessage: '',
-        spinner:      {show: angular.noop, hide: angular.noop},
-        events:       {beforeCall: angular.noop, afterCall: angular.noop}
-    };
-
-    if ("undefined" !== typeof angular2now) {
-        var ng2nOptions = angular2now.options();
-    }
-    var currentModule;
-
-    function getNg2nSettings() {
-        currentModule = ng2nOptions.currentModule();
-
-        return {
-            events: ng2nOptions.events,
-            spinner: ng2nOptions.spinner
-        }
-    }
 
     function restConfig(options) {
         angular.merge(restOptions, options);
@@ -250,6 +258,27 @@ var ng2nRestCall = function () {
         }
 
     }
+
+    // Register with SystemJS, if present
+    if (typeof System !== 'undefined' && System.register) {
+
+        System.register("ng2nRestCall", [], function (_export) {
+
+            _export('restConfig', restConfig);
+            _export('RestCall', RestCall);
+
+            return {
+                setters: [],
+                execute: function () {
+                    init();
+                }
+            };
+
+        })
+    } else {
+        init();
+    }
+
 
     return {
         restConfig: restConfig,
