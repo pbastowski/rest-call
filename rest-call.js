@@ -258,19 +258,4 @@ var ng2nRestCall = function () {
 
 }();
 
-// Node.js
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = ng2nRestCall;
-}
-
-// AMD / RequireJS
-else if (typeof define !== 'undefined' && define.amd) {
-    define('ng2nRestCall', [], function () {
-        return ng2nRestCall;
-    });
-}
-
-// included directly
-else {
-    this.ng2nRestCall = ng2nRestCall;
-}
+module.exports = ng2nRestCall;

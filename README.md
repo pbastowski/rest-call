@@ -4,15 +4,23 @@ This package exports `restConfig` (function) and `RestCall` (annotation), which 
 
 ## Installation
 
-    meteor add pbastowski:rest-call
+    npm i -S ng2now-rest-call
     
 ## Usage
 
-In the JavaScript (ES6) file where you define your bootstrap class or where you configure angular2now.options() do this:
+In the JavaScript (ES6) file where you first import from 'angular2-now' do this:
 
 ```javascript
-import {restConfig} from 'ng2nRestCall';
+// Import from angular2-now
+import {SetModule, Component, bootstrap, init} from 'angular2-now';
 
+// Initialise the library
+init();
+
+// Now, you can import from ng2now
+import {restConfig} from 'ng2now-rest-call';
+
+// And then you can configure some options
 restConfig({
     baseUrl: 'http://jsonplaceholder.typicode.com/',
     spinner: {
@@ -32,7 +40,7 @@ restConfig({
 Now, define some REST methods by annotating stub methods in a class, and then call them:
 
 ```javascript
-import {RestCall} from 'ng2nRestCall';
+import {RestCall} from 'ng2now-rest-call';
 
 class myComponent {
 

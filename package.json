@@ -1,0 +1,16 @@
+{
+  "name": "ng2now-rest-call",
+  "version": "1.0.2",
+  "description": "",
+  "main": "rest-call.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbastowski/rest-call.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
